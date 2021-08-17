@@ -16,6 +16,7 @@ class FilePaths:
     fn_char_list = '../model/charList.txt'
     fn_summary = '../model/summary.json'
     fn_corpus = '../data/corpus.txt'
+    fn_img="../../handwritten-text-recognition-for-apache-mxnet/notrephaped.png"
 
 
 def get_img_height() -> int:
@@ -181,7 +182,7 @@ def main():
     # infer text on test image
     elif args.mode == 'infer':
         model = Model(list(open(FilePaths.fn_char_list).read()), decoder_type, must_restore=True, dump=args.dump)
-        infer(model, args.img_file)
+        infer(model, FilePaths.fn_img)
 
 
 if __name__ == '__main__':

@@ -32,7 +32,10 @@ class Model:
         self.decoder_type = decoder_type
         self.must_restore = must_restore
         self.snap_ID = 0
-
+        
+        config = tf.compat.v1.ConfigProto()
+        config.gpu_options.allow_growth = True
+        session = tf.compat.v1.InteractiveSession(config=config)
         # Whether to use normalization over a batch or a population
         self.is_train = tf.compat.v1.placeholder(tf.bool, name='is_train')
 
@@ -43,7 +46,6 @@ class Model:
         self.setup_cnn()
         self.setup_rnn()
         self.setup_ctc()
-
         # setup optimizer to train NN
         self.batches_trained = 0
         self.update_ops = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.UPDATE_OPS)
